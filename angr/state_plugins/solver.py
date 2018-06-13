@@ -248,8 +248,8 @@ class SimSolver(SimStatePlugin):
         """
         Given an AST, iterate over all the keys of all the BVS leaves in the tree which are registered.
         """
-        reverse_mapping = {iter(var.variables).next(): k for k, var in self.eternal_tracked_variables.iteritems()}
-        reverse_mapping.update({iter(var.variables).next(): k for k, var in self.temporal_tracked_variables.iteritems() if k[-1] is not None})
+        reverse_mapping = {iter(var.variables).next(): (k, var) for k, var in self.eternal_tracked_variables.iteritems()}
+        reverse_mapping.update({iter(var.variables).next(): (k, var) for k, var in self.temporal_tracked_variables.iteritems() if k[-1] is not None})
 
         for var in v.variables:
             if var in reverse_mapping:
